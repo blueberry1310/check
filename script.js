@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }*/
         
-        if (studentNumber) {
+        if (studentNumber !== null) {
             // 학번을 Firebase Realtime Database에 저장
             push(ref(database, 'submissions'), {
                 studentNumber: studentNumber,
