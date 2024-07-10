@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // 학번을 Firebase Realtime Database에 저장
             push(ref(database, 'submissions'), {
                 studentNumber: studentNumber,
-                timeStamp: timestamp: new Date().toISOString()
+                timeStamp: new Date().toISOString()
             })
             .then(() => {
                 alert('출석 체크 완료!.');
