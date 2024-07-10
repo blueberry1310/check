@@ -33,12 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
         return true;
     }
-    
-    keys.forEach(key => {
-        key.addEventListener('click', () => {
-            display.value += key.getAttribute('data-value');
-        });
-    });
 
     deleteButton.addEventListener('click', () => {
         display.value = display.value.slice(0, -1);
