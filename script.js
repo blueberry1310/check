@@ -3,30 +3,36 @@ import { database } from "./firebase-config.js";
 
 document.addEventListener('DOMContentLoaded', () => {
     const display = document.getElementById('display');
-    const keys = document.querySelectorAll('.key');
+    const keypad = document.getElementById('keypad');
+    const dateTime = document.getElementById('date-time');
     const enterButton = document.getElementById('enter');
     const deleteButton = document.getElementById('delete');
 
-function validateStudentNumber(studentNumber) {
-    // 학번은 5자리여야 함
-    if (studentNumber.length !== 5) {
-      return false;
+    function updateDateTime() {
+        const now = new Date();
+        dateTime.innerText = now.toLocaleString();
     }
 
-    // 각 자리별 조건 검증
-    var A = parseInt(studentNumber.charAt(0), 10);
-    var B = parseInt(studentNumber.charAt(1), 10);
-    var C = parseInt(studentNumber.charAt(2), 10);
-    var D = parseInt(studentNumber.charAt(3), 10);
-    var E = parseInt(studentNumber.charAt(4), 10);
-
-    // 조건 검증
-    if (!(A >= 1 && A <= 3) || !(B === 0 || B === 1) || !(D >= 0 && D <= 2)) {
-      return false;
+    function validateStudentNumber(studentNumber) {
+        // 학번은 5자리여야 함
+        if (studentNumber.length !== 5) {
+          return false;
+        }
+    
+        // 각 자리별 조건 검증
+        var A = parseInt(studentNumber.charAt(0), 10);
+        var B = parseInt(studentNumber.charAt(1), 10);
+        var C = parseInt(studentNumber.charAt(2), 10);
+        var D = parseInt(studentNumber.charAt(3), 10);
+        var E = parseInt(studentNumber.charAt(4), 10);
+    
+        // 조건 검증
+        if (!(A >= 1 && A <= 3) || !(B === 0 || B === 1) || !(D >= 0 && D <= 2)) {
+          return false;
+        }
+    
+        return true;
     }
-
-    return true;
-}
     
     keys.forEach(key => {
         key.addEventListener('click', () => {
@@ -63,4 +69,25 @@ function validateStudentNumber(studentNumber) {
             alert('학번을 입력해주세요.');
         }
     });
+
+    keypad.addEventListener('click', function (event) {
+        const target = event.target;
+        if (target.tagName === 'LI') {
+            const value = target.innerText;
+
+            if (value === '삭제') {
+                display.innerText = display.innerText.slice(0, -1);
+            } else if (value === '입력') {
+                alert('입력된 값: ' + display.innerText);
+                display.innerText = '';
+            } else {
+                display.innerText += value;
+            }
+        }
+    });
+
+    // 초기 날짜 및 시간 업데이트
+    updateDateTime();
+    // 1초마다 날짜 및 시간 업데이트
+    setInterval(updateDateTime, 1000);
 });
