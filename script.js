@@ -1,37 +1,31 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function () {
     const display = document.getElementById('display');
-    const keys = document.querySelectorAll('.key');
-    const enterButton = document.getElementById('enter');
-    const deleteButton = document.getElementById('delete');
+    const keypad = document.getElementById('keypad');
+    const dateTime = document.getElementById('date-time');
 
-    keys.forEach(key => {
-        key.addEventListener('click', () => {
-            display.value += key.getAttribute('data-value');
-        });
-    });
+    function updateDateTime() {
+        const now = new Date();
+        dateTime.innerText = now.toLocaleString();
+    }
 
-    deleteButton.addEventListener('click', () => {
-        display.value = display.value.slice(0, -1);
-    });
+    keypad.addEventListener('click', function (event) {
+        const target = event.target;
+        if (target.tagName === 'LI') {
+            const value = target.innerText;
 
-    enterButton.addEventListener('click', () => {
-        const studentNumber = display.value;
-        if (studentNumber) {
-            // 학번을 Firebase Realtime Database에 저장
-            const newStudentRef = database.ref('studentNumbers').push();
-            newStudentRef.set({
-                studentNumber: studentNumber,
-                timestamp: new Date().toISOString()
-            })
-            .then(() => {
-                alert('학번이 성공적으로 저장되었습니다.');
-                display.value = '';
-            })
-            .catch(error => {
-                console.error('Error writing document: ', error);
-            });
-        } else {
-            alert('학번을 입력해주세요.');
+            if (value === '삭제') {
+                display.innerText = display.innerText.slice(0, -1);
+            } else if (value === '입력') {
+                alert('입력된 값: ' + display.innerText);
+                display.innerText = '';
+            } else {
+                display.innerText += value;
+            }
         }
     });
+
+    // 초기 날짜 및 시간 업데이트
+    updateDateTime();
+    // 1초마다 날짜 및 시간 업데이트
+    setInterval(updateDateTime, 1000);
 });
