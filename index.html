@@ -1,40 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modern Keypad Example</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
-    <script src="firebase-config.js"></script>
+    <title>키패드</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
         <div class="left-panel">
-            <input type="text" id="display" disabled>
-            <div class="info">
-                <p>현재 출석률: 90%</p>
-                <p>날짜: 2024-07-08</p>
-            </div>
+            <div class="display" id="display"></div>
+            <div class="date-time" id="date-time"></div>
+            <div class="attendance-rate" id="attendance-rate">출석률: 100%</div>
         </div>
         <div class="right-panel">
-            <div class="keypad">
-                <button class="key" data-value="1">1</button>
-                <button class="key" data-value="2">2</button>
-                <button class="key" data-value="3">3</button>
-                <button class="key" data-value="4">4</button>
-                <button class="key" data-value="5">5</button>
-                <button class="key" data-value="6">6</button>
-                <button class="key" data-value="7">7</button>
-                <button class="key" data-value="8">8</button>
-                <button class="key" data-value="9">9</button>
-                <button class="key" data-value="0">0</button>
-                <button class="control" id="enter">Enter</button>
-                <button class="control" id="delete">Delete</button>
-            </div>
+            <ul class="keypad" id="keypad">
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+                <li>4</li>
+                <li>5</li>
+                <li>6</li>
+                <li>7</li>
+                <li>8</li>
+                <li>9</li>
+                <li>0</li>
+                <li id="delete">삭제</li>
+                <li id="enter">입력</li>
+            </ul>
         </div>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>
