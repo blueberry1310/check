@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
         dateTime.innerText = now.toLocaleString();
     }
 
-    function validateStudentNumber(studentNumber) {
+    /*function validateStudentNumber(studentNumber) {
         // 학번은 5자리여야 함
         if (studentNumber.length !== 5) {
           return false;
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     
         return true;
-    }
+    }*/
 
     deleteButton.addEventListener('click', () => {
         display.value = display.value.slice(0, -1);
@@ -41,10 +41,10 @@ document.addEventListener('DOMContentLoaded', () => {
     enterButton.addEventListener('click', () => {
         const studentNumber = display.value;
 
-        if (!validateStudentNumber(studentNumber)) {
+        /*if (!validateStudentNumber(studentNumber)) {
             alert('올바른 학번 형식이 아닙니다!');
             return;
-        }
+        }*/
         
         if (studentNumber) {
             // 학번을 Firebase Realtime Database에 저장
