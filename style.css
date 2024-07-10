@@ -55,6 +55,8 @@ body {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 0.3em;
+    list-style: none;
+    padding: 0;
 }
 
 .keypad li {
@@ -84,4 +86,5 @@ body {
 #enter {
     background-color: #fa86be;
 }
+
 
