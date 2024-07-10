@@ -29,3 +29,4 @@ document.addEventListener('DOMContentLoaded', function () {
     // 1초마다 날짜 및 시간 업데이트
     setInterval(updateDateTime, 1000);
 });
+
