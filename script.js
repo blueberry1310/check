@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const dateTime = document.getElementById('date-time');
     const enterButton = document.getElementById('enter');
     const deleteButton = document.getElementById('delete');
-    const database = window.database;
+  
 
     function updateDateTime() {
         const now = new Date();
