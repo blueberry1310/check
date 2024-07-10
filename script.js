@@ -1,4 +1,4 @@
-import { getDatabase, ref, push, get } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+import { ref, push, get } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 import { database } from "./firebase-config.js"; 
 
 document.addEventListener('DOMContentLoaded', () => {
