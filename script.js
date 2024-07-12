@@ -38,14 +38,15 @@ document.addEventListener('DOMContentLoaded', () => {
     let isProcessing = false;
     let isDeleting = false;
 
-    deleteButton.addEventListener('click', () => {
+    function deleteLastCharacter() {
         if (isDeleting) return;
         isDeleting = true;
         
         display.innerText = display.innerText.slice(0, -1);
-
         isDeleting = false;
-    });
+    }
+
+    deleteButton.addEventListener('click', deleteLastCharacter);
 
     enterButton.addEventListener('click', () => {
         if (isProcessing) return;
@@ -87,11 +88,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const value = target.innerText;
 
             if (value === '삭제') {
-                if(!isDeleting) {
-                    isDeleting = true;
-                    display.innerText = display.innerText.slice(0, -1);
-                    isDeleting = false;
-                }
+                deleteLastCharacter();
+                 
+                
             } else if (value === '입력') {
                 if (!isProcessing) {
                    enterButton.click();
