@@ -39,7 +39,12 @@ document.addEventListener('DOMContentLoaded', () => {
         display.value = display.innerText.slice(0, -1);
     });
 
+    let isProcessing = false;
+
     enterButton.addEventListener('click', () => {
+        if (isProcessing) return;
+        isProcessing = true;
+        
         const studentNumber = display.innerText;
 
         /*if (!validateStudentNumber(studentNumber)) {
@@ -60,6 +65,9 @@ document.addEventListener('DOMContentLoaded', () => {
             .catch(error => {
                 console.error('Error writing document: ', error);
                 alert('출석 체크 중 오류가 발생했습니다.');
+            });
+            .finally(() => {
+               isProcessing = false;
             });
         } else {
             alert('학번을 입력해주세요.');
