@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }*/
 
     deleteButton.addEventListener('click', () => {
-        display.value = display.innerText.slice(0, -1);
+        display.innerText = display.innerText.slice(0, -1);
     });
 
     let isProcessing = false;
@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         } else {
             alert('학번을 입력해주세요.');
-            isProcessing - false;
+            isProcessing = false;
         }
     });
 
