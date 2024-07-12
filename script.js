@@ -36,11 +36,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }*/
 
     deleteButton.addEventListener('click', () => {
-        display.value = display.value.slice(0, -1);
+        display.value = display.innerText.slice(0, -1);
     });
 
     enterButton.addEventListener('click', () => {
-        const studentNumber = display.innerTExt;
+        const studentNumber = display.innerText;
 
         /*if (!validateStudentNumber(studentNumber)) {
             alert('올바른 학번 형식이 아닙니다!');
