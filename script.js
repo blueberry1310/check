@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const value = target.innerText;
 
             if (value === '삭제') {
-                enterButton.click();
+                deleteButton.click();
             } else if (value === '입력') {
                 enterButton.click();
             } else {
