@@ -40,14 +40,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     enterButton.addEventListener('click', () => {
-        const studentNumber = display.value;
+        const studentNumber = display.innerTExt;
 
         /*if (!validateStudentNumber(studentNumber)) {
             alert('올바른 학번 형식이 아닙니다!');
             return;
         }*/
         
-        if (studentNumber !== null) {
+        if (studentNumber && studentNumber.trim()_ !== "") {
             // 학번을 Firebase Realtime Database에 저장
             push(ref(database, 'submissions'), {
                 studentNumber: studentNumber,
@@ -55,10 +55,11 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             .then(() => {
                 alert('출석 체크 완료!.');
-                display.value = '';
+                display.innerText = '';
             })
             .catch(error => {
                 console.error('Error writing document: ', error);
+                alert('출석 체크 중 오류가 발생했습니다.');
             });
         } else {
             alert('학번을 입력해주세요.');
@@ -73,8 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (value === '삭제') {
                 display.innerText = display.innerText.slice(0, -1);
             } else if (value === '입력') {
-                alert('입력된 값: ' + display.innerText);
-                display.innerText = '';
+                enterButton.click();
             } else {
                 display.innerText += value;
             }
