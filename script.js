@@ -38,12 +38,16 @@ document.addEventListener('DOMContentLoaded', () => {
     let isProcessing = false;
     let isDeleting = false;
 
-    function deleteLastCharacter() {
+    function deleteLastCharacter(event) {
         if (isDeleting) return;
         isDeleting = true;
         
         display.innerText = display.innerText.slice(0, -1);
         isDeleting = false;
+
+         if (event) {
+            event.stopPropagation();
+        }
     }
 
     deleteButton.addEventListener('click', deleteLastCharacter);
@@ -88,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const value = target.innerText;
 
             if (value === '삭제') {
-                deleteLastCharacter();
+                deleteLastCharacter(event);
                  
                 
             } else if (value === '입력') {
