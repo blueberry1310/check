@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if(!isDeleting) {
                     isDeleting = true;
                     display.innerText = display.innerText.slice(0, -1);
-                    isDeleting - false;
+                    isDeleting = false;
                 }
             } else if (value === '입력') {
                 if (!isProcessing) {
