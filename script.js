@@ -65,9 +65,9 @@ document.addEventListener('DOMContentLoaded', () => {
             .catch(error => {
                 console.error('Error writing document: ', error);
                 alert('출석 체크 중 오류가 발생했습니다.');
-            });
+            })
             .finally(() => {
-               isProcessing = false;
+                isProcessing = false;
             });
         } else {
             alert('학번을 입력해주세요.');
