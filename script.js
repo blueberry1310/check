@@ -87,9 +87,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const value = target.innerText;
 
             if (value === '삭제') {
-                deleteButton.click();
+                if(!isDeleting) {
+                  deleteButton.click();
+                }
             } else if (value === '입력') {
-                enterButton.click();
+                if (!isPricessing) {
+                   enterButton.click();
+               }
             } else {
                 display.innerText += value;
             }
