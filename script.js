@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         display.innerText = display.innerText.slice(0, -1);
 
-        isDeieting = false;
+        isDeleting = false;
     });
 
     enterButton.addEventListener('click', () => {
