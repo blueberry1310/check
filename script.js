@@ -71,6 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         } else {
             alert('학번을 입력해주세요.');
+            isProcessing - false;
         }
     });
 
