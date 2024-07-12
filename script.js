@@ -35,11 +35,17 @@ document.addEventListener('DOMContentLoaded', () => {
         return true;
     }*/
 
-    deleteButton.addEventListener('click', () => {
-        display.innerText = display.innerText.slice(0, -1);
-    });
-
     let isProcessing = false;
+    let isDeleting = false;
+
+    deleteButton.addEventListener('click', () => {
+        if (isDeleting) return;
+        isDeleting = true;
+        
+        display.innerText = display.innerText.slice(0, -1);
+
+        isDeieting = false;
+    });
 
     enterButton.addEventListener('click', () => {
         if (isProcessing) return;
@@ -81,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const value = target.innerText;
 
             if (value === '삭제') {
-                display.innerText = display.innerText.slice(0, -1);
+                enterButton.click();
             } else if (value === '입력') {
                 enterButton.click();
             } else {
