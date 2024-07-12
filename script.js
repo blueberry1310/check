@@ -88,10 +88,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (value === '삭제') {
                 if(!isDeleting) {
-                  deleteButton.click();
+                    isDeleting = true;
+                    display.innerText = display.innerText.slice(0, -1);
+                    isDeleting - false;
                 }
             } else if (value === '입력') {
-                if (!isPricessing) {
+                if (!isProcessing) {
                    enterButton.click();
                }
             } else {
