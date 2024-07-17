@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const dbRef = ref(database);
-        curEntry = 0;
+        var curEntry = 0;
 
         // maxEntries와 currentEntryCount 값을 가져와서 비율을 계산하고 표시
         get(child(dbRef, 'entryCounts')).then((snapshot) => {
