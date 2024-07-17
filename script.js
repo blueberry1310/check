@@ -14,26 +14,27 @@ document.addEventListener('DOMContentLoaded', () => {
         dateTime.innerText = now.toLocaleString();
     }
 
-    /*function validateStudentNumber(studentNumber) {
-        // 학번은 5자리여야 함
-        if (studentNumber.length !== 5) {
-          return false;
-        }
-    
-        // 각 자리별 조건 검증
-        var A = parseInt(studentNumber.charAt(0), 10);
-        var B = parseInt(studentNumber.charAt(1), 10);
-        var C = parseInt(studentNumber.charAt(2), 10);
-        var D = parseInt(studentNumber.charAt(3), 10);
-        var E = parseInt(studentNumber.charAt(4), 10);
-    
-        // 조건 검증
-        if (!(A >= 1 && A <= 3) || !(B === 0 || B === 1) || !(D >= 0 && D <= 2)) {
-          return false;
-        }
-    
-        return true;
-    }*/
+  // 학번 형식 검증 함수
+  function validateStudentNumber(studentNumber) {
+    // 학번은 5자리여야 함
+    if (studentNumber.length !== 5) {
+      return false;
+    }
+
+    // 각 자리별 조건 검증
+    var A = parseInt(studentNumber.charAt(0), 10);
+    var B = parseInt(studentNumber.charAt(1), 10);
+    var C = parseInt(studentNumber.charAt(2), 10);
+    var D = parseInt(studentNumber.charAt(3), 10);
+    var E = parseInt(studentNumber.charAt(4), 10);
+
+    // 조건 검증
+    if (!(A >= 1 && A <= 3) || !(B === 0 || B === 1) || !(D >= 0 && D <= 2)) {
+      return false;
+    }
+
+    return true;
+  }
 
     let isProcessing = false;
     let isDeleting = false;
@@ -58,10 +59,11 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const studentNumber = display.innerText;
 
-        /*if (!validateStudentNumber(studentNumber)) {
+        if (!validateStudentNumber(studentNumber)) {
             alert('올바른 학번 형식이 아닙니다!');
+            display.innerText = '';
             return;
-        }*/
+        }
         
         if (studentNumber && studentNumber.trim() !== "") {
             // 학번을 Firebase Realtime Database에 저장
