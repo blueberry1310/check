@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const dateTime = document.getElementById('date-time');
     const enterButton = document.getElementById('enter');
     const deleteButton = document.getElementById('delete');
+    const entryField = document.getElementById('attendance-rate');
 
     function updateDateTime() {
         const now = new Date();
@@ -34,6 +35,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
     return true;
   }
+
+    function updateCurrentEntryCount() {
+        const entryCountsRef = ref(database, 'entryCounts');
+        get(entryCountsRef).then((snapshot) => {
+            if (snapshot.exists()) {
+                const entryCounts = snapshot.val();
+                const currentEntryCount = entryCounts.currentEntryCount + 1;
+                update(entryCountsRef, { currentEntryCount })
+                    .then(() => {
+                        console.log('Current entry count updated successfully');
+                    })
+                    .catch((error) => {
+                        console.error('Error updating current entry count: ', error);
+                    });
+            } else {
+                console.error('entryCounts data does not exist');
+            }
+        }).catch((error) => {
+            console.error('Error fetching entry counts: ', error);
+        });
+    }
 
     let isProcessing = false;
     let isDeleting = false;
@@ -81,8 +103,14 @@ document.addEventListener('DOMContentLoaded', () => {
             .finally(() => {
                 isProcessing = false;
             });
+                    
+        } else {
+            alert('학번을 입력해주세요.');
+            isProcessing = false;
+        }
 
         const dbRef = ref(database);
+        const curEntry = 0;
 
         // maxEntries와 currentEntryCount 값을 가져와서 비율을 계산하고 표시
         get(child(dbRef, 'entryCounts')).then((snapshot) => {
@@ -90,21 +118,34 @@ document.addEventListener('DOMContentLoaded', () => {
                 const entryCounts = snapshot.val();
                 const maxEntries = entryCounts.maxEntries;
                 const currentEntryCount = entryCounts.currentEntryCount;
+                curEntry = currentEntryCount;
                 const ratio = (currentEntryCount / maxEntries) * 100;
 
-                entryRatioDisplay.innerText = `현재 출석 비율: ${ratio.toFixed(2)}%`;
+                entryField.innerText = `현재 출석 비율: ${ratio.toFixed(2)}%`;
             } else {
-                entryRatioDisplay.innerText = '출석 비율 정보를 가져올 수 없습니다.';
+                entryField.innerText = '출석 비율 정보를 가져올 수 없습니다.';
             }
         }).catch((error) => {
             console.error('Error fetching entry counts: ', error);
             alert('출석 비율 정보를 가져오는 중 오류가 발생했습니다.');
         });
-            
-        } else {
-            alert('학번을 입력해주세요.');
+
+        push(ref(database, 'entryCounts'), {
+            studentNumber: studentNumber,
+            timeStamp: new Date().toISOString()
+        })
+        .then(() => {
+            updateCurrentEntryCount();
+            alert('출석 체크 완료!.');
+            display.innerText = '';
+        })
+        .catch(error => {
+            console.error('Error writing document: ', error);
+            alert('출석 체크 중 오류가 발생했습니다.');
+        })
+        .finally(() => {
             isProcessing = false;
-        }
+        });
     });
 
     keypad.addEventListener('click', function (event) {
