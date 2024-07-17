@@ -11,8 +11,12 @@ body {
 .container {
     display: flex;
     width: 100%;
-    height: 100%;
+    max-width: 800px;
+    height: 80vh;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    border-radius: 20px;
+    overflow: hidden;
 }
 
 .left-panel, .right-panel {
@@ -27,23 +31,9 @@ body {
 
 .left-panel {
     border-right: 1px solid #e0e0e0;
-    background-color: #ffffff;
 }
 
-.display {
-    width: 100%;
-    height: 3em;
-    margin-bottom: 1.5em;
-    font-size: 1.5em;
-    text-align: center;
-    border: none;
-    border-radius: 10px;
-    line-height: 3em;
-    background-color: #f9f9f9;
-    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.date-time, .attendance-rate {
+.display, .date-time, .attendance-rate, #entry-ratio {
     width: 100%;
     margin: 0.7em 0;
     font-size: 1.2em;
@@ -55,12 +45,19 @@ body {
     box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
+.display {
+    height: 3em;
+    margin-bottom: 1.5em;
+    font-size: 1.5em;
+    line-height: 3em;
+}
+
 .keypad {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 0.5em;
-    width: 90%;
-    height: 70%;
+    width: 100%;
+    height: auto;
     list-style: none;
     padding: 0;
 }
@@ -68,10 +65,8 @@ body {
 .keypad li {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
-    height: 90%;
+    aspect-ratio: 1;
     font-size: 1.3em;
-    width: 90%;
-    margin: 0;
     background-color: #ffffff;
     border-radius: 10px;
     display: flex;
