@@ -118,6 +118,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 const entryCounts = snapshot.val();
                 const maxEntries = entryCounts.maxEntries;
                 const currentEntryCount = entryCounts.currentEntryCount;
+                console.log(maxEntries);
+                console.log(currentEntryCount);
+                console.log(typeof maxEntries);
+                console.log(typeof currentEntryCount);
                 curEntry = currentEntryCount;
                 const ratio = (currentEntryCount / maxEntries) * 100;
 
