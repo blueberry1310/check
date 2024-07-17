@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const dateTime = document.getElementById('date-time');
     const enterButton = document.getElementById('enter');
     const deleteButton = document.getElementById('delete');
-  
 
     function updateDateTime() {
         const now = new Date();
@@ -82,6 +81,26 @@ document.addEventListener('DOMContentLoaded', () => {
             .finally(() => {
                 isProcessing = false;
             });
+
+        const dbRef = ref(database);
+
+        // maxEntries와 currentEntryCount 값을 가져와서 비율을 계산하고 표시
+        get(child(dbRef, 'entryCounts')).then((snapshot) => {
+            if (snapshot.exists()) {
+                const entryCounts = snapshot.val();
+                const maxEntries = entryCounts.maxEntries;
+                const currentEntryCount = entryCounts.currentEntryCount;
+                const ratio = (currentEntryCount / maxEntries) * 100;
+
+                entryRatioDisplay.innerText = `현재 출석 비율: ${ratio.toFixed(2)}%`;
+            } else {
+                entryRatioDisplay.innerText = '출석 비율 정보를 가져올 수 없습니다.';
+            }
+        }).catch((error) => {
+            console.error('Error fetching entry counts: ', error);
+            alert('출석 비율 정보를 가져오는 중 오류가 발생했습니다.');
+        });
+            
         } else {
             alert('학번을 입력해주세요.');
             isProcessing = false;
