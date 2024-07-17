@@ -112,6 +112,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const dbRef = ref(database);
         var curEntry = 0;
 
+        updateCurrentEntryCount();
+
         // maxEntries와 currentEntryCount 값을 가져와서 비율을 계산하고 표시
         get(child(dbRef, 'entryCounts')).then((snapshot) => {
             if (snapshot.exists()) {
@@ -132,23 +134,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }).catch((error) => {
             console.error('Error fetching entry counts: ', error);
             alert('출석 비율 정보를 가져오는 중 오류가 발생했습니다.');
-        });
-
-        push(ref(database, 'entryCounts'), {
-            studentNumber: studentNumber,
-            timeStamp: new Date().toISOString()
-        })
-        .then(() => {
-            updateCurrentEntryCount();
-            alert('출석 체크 완료!.');
-            display.innerText = '';
-        })
-        .catch(error => {
-            console.error('Error writing document: ', error);
-            alert('출석 체크 중 오류가 발생했습니다.');
-        })
-        .finally(() => {
-            isProcessing = false;
         });
     });
 
